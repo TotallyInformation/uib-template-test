@@ -1,0 +1,38 @@
+{
+    "name": "uib-template-test",
+    "version": "1.0.0",
+    "description": "An external uibuilder template for use with Node-RED.",
+    "scripts": {
+    },
+    "browserslist": [
+      "> 0.5%",
+      "maintained node versions",
+      "last 2 versions",
+      "not dead",
+      "not ie"
+    ],
+    "keywords": [
+      "node-red",
+      "uibuilder",
+      "ui",
+      "gui",
+      "dashboard",
+      "spa",
+      "web",
+      "website",
+      "data-driven",
+      "webpage"
+    ],
+    "homepage": "https://github.com/TotallyInformation/uib-template-test",
+    "bugs": "https://github.com/TotallyInformation/uib-template-test/issues",
+    "author": {
+      "name": "Julian Knight",
+      "url": "https://github.com/TotallyInformation"
+    },
+    "license": "Apache-2.0",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/TotallyInformation/uib-template-test.git"
+    }
+  }
+  
