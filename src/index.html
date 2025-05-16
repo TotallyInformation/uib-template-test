@@ -11,13 +11,6 @@
     <!-- Your own CSS -->
     <link type="text/css" rel="stylesheet" href="./index.css" media="all">
 
-    <script type="importmap">
-        // This is optional but makes your js code simpler.
-        {"imports": {
-            "uibuilder": "../uibuilder/uibuilder.esm.min.js"
-        }}
-    </script>
-
     <!-- NOTE this MUST be loaded as a MODULE. Also, uib client loaded in index not here -->
     <script type="module" async src="./index.mjs">/* Your custom code + Imports uibuilder */</script>
 
@@ -37,12 +30,26 @@
             <p>
                 It also shows how to very simply send input back to Node-RED.
             </p>
-            <div class="counter-container"></div>
-                <button class="counter-button decrease" id="decreaseBtn">-</button>
-                <span class="counter-display" id="counterValue">0</span>
-                <button class="counter-button increase" id="increaseBtn">+</button>
+        </article>
+
+        <article>
+            <h2>Counter - also sends to Node-RED</h2>
+            <div title="Click the buttons to change the value and inform Node-RED. Fast clicks don't send all values until the last one.">
+                <button id="decreaseBtn">-</button>
+                <output id="counter" for="decreaseBtn increaseBtn">0</output>
+                <button id="increaseBtn">+</button>
             </div>
         </article>
+
+        <article>
+            <h2>Send data to Node-RED using a form to send everything at once</h2>
+            <form>
+                <label for="userData">Enter some text:</label>
+                <input type="text" id="userData" name="userData" placeholder="Type your message here">
+                <button id="sendBtn" type="button" onclick="uibuilder.eventSend(event)">Send</button>
+            </form>
+        </article>
+
         <div id="more"><!-- '#more' is used as a parent for dynamic HTML content in examples --></div>
     </main>
 

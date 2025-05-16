@@ -27,6 +27,16 @@ If you need any development npm libraries, you can add them as normal to the `pa
 
 You should not include any runtime libraries in `package.json` as they will be ignored by uibuilder. Instead, use the "Libraries" tab in the uibuilder node to add any runtime libraries that you need.
 
+## UI
+
+The HTML shows up a title and sub-title. Then there are 3 "cards" using the semantic `article` element.
+
+* Card 1 - A simple card with a title and text.
+* Card 2 - A card with +/- buttons and an output element. This is a simple counter. The updated counter value is also sent back to Node-RED (see `index.mjs`). Rapid clicks update the value but only the last value is sent back to Node-RED.
+* Card 3 - A card with a text input and a button. The text is sent back to Node-RED when the button is clicked. This uses an HTML form so all data in the form is automatically sent back to Node-RED when the buttton is clicked. Make sure to set a debug node in your flow to show the whole message object to see all the data.
+
+You can send a message to the uibuilder node in Node-RED. The `msg.payload` text will be shown beneath the cards.
+
 ## Folder Structure
 
 * The root folder contains the `package.json`, `README.md`, and LICENSE files. It can contain other files as needed.
