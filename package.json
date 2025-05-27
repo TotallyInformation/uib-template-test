@@ -1,9 +1,18 @@
 {
     "name": "uib-template-test",
-    "version": "2.0.0",
+    "version": "2025-05-27",
     "private": true,
-    "description": "An external uibuilder template for use with Node-RED.",
+    "description": "An external uibuilder template for use with Node-RED. Configured to use the ES Module version of uibuilder.",
     "scripts": {
+    },
+    "devDependencies": {
+      "@eslint/eslintrc": "^3.3.1",
+      "@eslint/js": "^9.27.0",
+      "@stylistic/eslint-plugin": "^4.2.0",
+      "eslint": "^9.27.0",
+      "eslint-plugin-html": "^8.1.3",
+      "eslint-plugin-jsdoc": "^50.6.17",
+      "globals": "^16.1.0"
     },
     "browserslist": [
       "> 0.5%",

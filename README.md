@@ -5,9 +5,8 @@ This is a test external template for node-red-contrib-uibuilder.
 ## Installation
 
 1. Add a suitable uibuilder node to your Node-RED flow and set the `url` then deploy.
-2. Open the uibuilder node in the Editor and choose "Load an external template using Degit" from the Template dropdown.
-3. Paste the following URL into the text box: `TotallyInformation/uib-template-test`
-4. Click the "Load" button.
+2. Open the uibuilder node in the Editor and choose "Simple ES Module Template (external)" from the Template dropdown.
+3. Click the "Load" button.
 
 The template will be downloaded and installed into the node's instance folder and is then ready to use. You can examine the files in the Files tab or open the instance folder in your code editor.
 
@@ -37,18 +36,32 @@ The HTML shows up a title and sub-title. Then there are 3 "cards" using the sema
 
 You can send a message to the uibuilder node in Node-RED. The `msg.payload` text will be shown beneath the cards.
 
+There is also an empty `<div>` element with the id `more`. This is included in all uibuilder templates. It is used by the uibuilder example flows that output dynamic UI elements. You may find it convenient to use for your own purposes. You can add your own elements to it in the HTML or JavaScript code. The uibuilder example flows will add their own elements to it when they are run.
+
+In addition, the `more` div uses uibuilder's `uib-topic` special attribute which allows it to be used as a target for messages sent from Node-RED. This is a useful feature that allows you to easily update the content of the page without having to write any JavaScript code. Send a message containing `{ topic: 'more', payload: 'Hello World' }` to the `uibuilder` node and the content of the `more` div will be updated with "Hello World". Note that the payload can contain HTML. As an example, use an inject node with `msg.payload` set to use a JSONata expression like `"<b style='background-color:var(--error)'>Hello!</b> This is a message from Node-RED at " & $moment()`. Don't forget to set `msg.topic` to `more` so that the uibuilder client library knows where to send the message.
+
+> **WARNING**: Using the "more" topic completely overwrites the contents of the `more` div.
+
 ## Folder Structure
 
 * The root folder contains the `package.json`, `README.md`, and LICENSE files. It can contain other files as needed.
-* `src` - The main source folder. This is where you will find the HTML, CSS and JavaScript files that make up the template. It is the default folder used by uibuilder.
-* `dist` - The distribution folder. This is where you would build your output files if you are using a build step.
+* `src` - The main source folder. This is where you will find the HTML, CSS and JavaScript files that make up the template. It is the default folder used by uibuilder. Note `*.mjs` is used for JavaScript files since ES Modules are used. You don't have to do that but it makes it easier to remember which files are loaded as JS Modules.
+* `dist` - The distribution folder. This is where you would build your output files if you are using a build step. By default, this template has no build step.
 * `api` - Optional API folder. This is where you would put any server-side code that you need to run.
 * `routes` - Optional routes folder. This is where you would put any server-side ExpressJS route functions. These could include server-side templates as well as dynamic routing URLs.
-* `node_modules` - This is where the Node.js libraries are installed if you have any. You would not need to modify this folder. You would also not normally include this folder in your version control system (e.g. git) as it can be re-created from the `package.json` file using `npm install`.
+* `types` - Contains typescript definition files (`*.d.ts`) for the uibuilder client library. This is not used by uibuilder but can be used by your IDE to provide type checking and auto-completion for the uibuilder client library. This is useful if you are using TypeScript or JavaScript with type checking enabled. Remember to update these for new uibuilder versions.
 
 Other folders can be added as needed for your own code.
 
 Only a single folder is used by uibuilder as the resources folder. `src` by defult. Sub-folder are also served and can be used as desired.
+
+## Multiple HTML pages
+
+uibuilder will happily serve up any number of web pages from a single instance. It will also make use of sub-folders. However, each folder should have an `index.html` file so that a URL that ends with the folder name will still work without error.
+
+Note that each html file is a separate page and requires its own JavaScript and uibuilder library reference. When moving between pages, remember that every page is stand-alone, a new environment. You can share one `index.js` file between multiple pages if you prefer but each page will run a separate instance.
+
+If multiple pages are connected to the same uibuilder instance, they will all get the same broadcast messages from Node-RED. So if you want to handle different messages on different pages, remember to filter them in your front-end JavaScript in `uibuilder.onChange('msg', ....)` function. Turn on the advanced flag for including a `msg._uib` property in output if you need to differentiate between pages and/or clients in Node-RED.
 
 ## URL endpoints
 
@@ -58,7 +71,6 @@ When using uibuilder's server-side resources, you will generally use `../uibuild
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
 
 This template may be used however you like. It is provided as a test template for uibuilder and is not intended to be a full template. You are free to use it as a starting point for your own template or to use it as-is if you find it useful.
-
